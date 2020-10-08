@@ -17,13 +17,38 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script type='text/javascript'>
-		(function() {
-		  function init() {var scr = document.createElement('script'); scr.type = 'text/javascript'; scr.defer = 'defer'; scr.src = 'https://cdn.qform24.com/forms.js?v=' + parseInt(new Date().getTime()/1000); var scrInsert = document.getElementsByTagName('script')[0]; scrInsert.parentNode.insertBefore(scr, scrInsert); }
-		  var d = document; var w = window;
-		  if (d.readyState == 'complete') {init(); } else {if (w.attachEvent) {w.attachEvent('onload', init); } else {w.addEventListener('load', init, false); } } })();
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			let url = new URL(window.location.href);
+			if(url.searchParams.get('promo')){
+				if(isNaN(parseInt(url.searchParams.get('promo')))){
+					return;
+				}
+				localStorage.setItem('promo', url.searchParams.get('promo'))
+			}
+			document.querySelector(".btn-s").addEventListener("click", () => {
+				let data = {};
+				if(localStorage.getItem("promo")){
+					data = {
+						url: document.querySelector("#url").value,
+						promo: localStorage.getItem("promo")
+					}
+				}else{
+					data = {
+						url: document.querySelector("#url").value
+					}
+				}
+				$.ajax({
+					url: 'https://zhurkinch.000webhostapp.com/server.php',
+					method: 'get',
+					data: data,
+					success: () => {
+						window.location.href = 'https://vk.com/im?sel=-195634750';
+					}
+				});
+			});
+		});
 	</script>
-  
 </head>
 
 <body>
@@ -38,7 +63,7 @@
 							<h1 class="text-uppercase">пишем вирус</h1>
 							<h5 class="text-uppercase">на java за 4 дня</h5>
 							<div class="d-flex align-items-center">
-								<a class="primary_btn" href="#"><span>Записаться</span></a>
+								<a class="primary_btn" href="#price"><span>Записаться</span></a>
 								<a class="primary_btn tr-bg" href="#about_area"><span>Подробнее</span></a>
 							</div>
 						</div>
@@ -130,7 +155,7 @@
 	<!--================ End Features Area =================-->
 
 	<!--================Start Portfolio Area =================-->
-	<section class="portfolio_area" id="portfolio">
+	<section class="portfolio_area" id="price">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -145,7 +170,7 @@
 	<!--================End Portfolio Area =================-->
 
 	<!--================ Start Newsletter Area =================-->
-	<section class="newsletter_area">
+	<section class="newsletter_area" id="create">
 		<div class="container">
 			<div class="row justify-content-center align-items-center">
 				<div class="col-lg-12">
@@ -155,11 +180,10 @@
 							Откройте личные сообщения ВКонтакте и оставьте ссылку на свой профиль! Мы с Вами свяжемся в течении суток 
 						</p>
 						<div class="subcribe-form">
-							<!--<form novalidate="true" action="" method="get" class="subscription relative">
-								<input name="profile_url" placeholder="https://vk.com/..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'https://vk.com/...'" required="" type="text">
-								<button class="primary-btn hover d-inline">Записаться</button>
-							</form>-->
-							<div id="6Y8s9DGB" data-formid="hE16021571322kN" class="_Forms_generate"></div>
+							<form class="subscription relative">
+								<input name="profile_url" id="url" placeholder="https://vk.com/..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'https://vk.com/...'" required="" type="text">
+								<button class="primary-btn hover d-inline btn-s">Записаться</button>
+							</form>
 						</div>
 					</div>
 				</div>
