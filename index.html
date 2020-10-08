@@ -43,9 +43,10 @@
 					method: 'get',
 					data: data,
 					success: () => {
-						window.location.href = 'https://vk.com/im?sel=-195634750';
+						document.querySelector(".ss-t").innerHTML = 'Вы записались на курс, откройте личные сообщения ВКонтакте чтобы мы могли с Вами связаться';
 					}
 				});
+				return false;
 			});
 		});
 	</script>
@@ -176,11 +177,11 @@
 				<div class="col-lg-12">
 					<div class="subscription_box text-center">
 						<h2 class="text-uppercase text-white">Записаться на курс</h2>
-						<p class="text-white">
+						<p class="text-white ss-t">
 							Откройте личные сообщения ВКонтакте и оставьте ссылку на свой профиль! Мы с Вами свяжемся в течении суток 
 						</p>
 						<div class="subcribe-form">
-							<form class="subscription relative">
+							<form class="subscription relative" onsubmit="return false;">
 								<input name="profile_url" id="url" placeholder="https://vk.com/..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'https://vk.com/...'" required="" type="text">
 								<button class="primary-btn hover d-inline btn-s">Записаться</button>
 							</form>
